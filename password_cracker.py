@@ -3,32 +3,36 @@
 ##password_cracker written vy "Youc3f"
 
 import hashlib
-import sys
-
 
 
 while True:
     try:
         wordlist_user = input('Entrez votre wordlist:')
-        wordlist_user='E:\\Python\\Dev\\'+ wordlist_user
-        wordlist=open(wordlist_user, 'r')
-        print (wordlist_user)
+        wordlist_user='E:\\Python\\Dev\\'+ wordlist_user+'.txt'
+        print ("Fichier : "+wordlist_user)
         
-        hash=input('entre ton hash sha224 : ')
+        wordlist=open(wordlist_user, 'w+')
+        
+        password=input('entre ton password : ')
         break
     except:
        print ('pas de fichier portant ce nom  \n')
     
-for word in wordlist.readlines():
-    word=word.strip('\n')
+wordlist_hash = hashlib.sha224(b"password").hexdigest()
 
-print (word)
-wordlist_hash = hashlib.sha224(b"word").hexdigest()
+print (password, wordlist_hash)   
 
-print (wordlist_hash)    
+wordlist.write(password+' '+wordlist_hash)
+wordlist.close()
+exit;
 
-if (hash ==wordlist_hash):
-    print ('password FOUND ==>'+word )
-else:
-    print ('password not FOUND! ')
-        
+
+#for word in wordlist.readlines():
+#    word=word.strip('\n')
+#
+#
+#if (hash ==wordlist_hash):
+#    print ('password FOUND ==>'+word )
+#else:
+#    print ('password not FOUND! ')
+#
